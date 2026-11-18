@@ -1,33 +1,43 @@
-# 🐍 Sistema de Coleta de Dados de Clientes
+# 🌐 ConectaMais — Sistema de Gestão da Satisfação de Clientes
 
-Projeto acadêmico desenvolvido em Python como parte dos estudos de Análise e Desenvolvimento de Sistemas.
+Projeto acadêmico desenvolvido em Python como parte do curso de Análise e Desenvolvimento de Sistemas.
 
 ## 📌 Sobre o projeto
 
-O sistema simula uma coleta básica de dados de clientes, permitindo registrar informações como nome, idade, cidade e nível de satisfação com o atendimento.
+O ConectaMais é um sistema desenvolvido para registrar, organizar e analisar avaliações de satisfação de clientes, oferecendo informações que podem auxiliar na compreensão da experiência do consumidor e na tomada de decisões.
 
-Após o cadastro, o programa apresenta os dados informados e realiza algumas classificações com base na idade e no nível de satisfação do cliente.
+A aplicação permite cadastrar avaliações, armazenar informações dos clientes e acompanhar indicadores de satisfação por meio de um dashboard interativo.
 
-## 🛠️ Conceitos utilizados
+## 🚀 Funcionalidades
 
-- Variáveis
-- Entrada e saída de dados
-- Estruturas condicionais (`if`, `elif` e `else`)
-- Estrutura de repetição (`while`)
-- Operadores de comparação
-- Lógica de programação
-- Processamento e classificação de dados
+- Cadastro de avaliações de clientes.
+- Armazenamento e organização dos dados.
+- Classificação dos clientes por nível de satisfação.
+- Cálculo da média de satisfação.
+- Indicadores de clientes satisfeitos, regulares e insatisfeitos.
+- Dashboard com gráficos de satisfação.
+- Acompanhamento da evolução mensal das avaliações.
+- Geração de relatório de indicadores.
 
-## 💻 Tecnologias
+## 🛠️ Tecnologias e conceitos utilizados
 
 - Python 3
+- CustomTkinter
+- Manipulação de arquivos CSV e JSON
+- Estruturas de dados: filas e árvores de busca
+- Estatística descritiva
+- Visualização de dados e gráficos
 
 ## 🎯 Objetivo
 
-Praticar conceitos fundamentais de programação em Python e desenvolver a lógica necessária para criar um sistema simples de coleta e processamento de dados.
+Desenvolver uma ferramenta de apoio à gestão da satisfação de clientes, aplicando conceitos de programação, estruturas de dados, estatística e análise de informações.
+
+## 🔮 Próximos passos
+
+O projeto está em evolução, com planejamento de uma versão web para ampliar o acesso ao sistema e possibilitar testes e avaliações por outras pessoas.
 
 ## 👨‍💻 Autor
 
-**Adriano dos Santos Souza Junior**
+Adriano Junior
 
 Estudante de Análise e Desenvolvimento de Sistemas.
