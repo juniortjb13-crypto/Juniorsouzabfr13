@@ -406,13 +406,28 @@ st.header("📝 Avalie um serviço")
 with st.form("formulario_avaliacao"):
     tipo_servico = st.selectbox(
         "Qual serviço você utilizou?",
-        [
+                [
             "Barbearia",
             "Salão de beleza",
             "Restaurante",
             "Lanchonete",
             "Oficina mecânica",
             "Mercado",
+            "Farmácia",
+            "Pet shop",
+            "Padaria",
+            "Supermercado",
+            "Loja de roupas",
+            "Loja de eletrônicos",
+            "Hotel e pousada",
+            "Transporte",
+            "Assistência técnica",
+            "Dentista",
+            "Escola e cursos",
+            "Lava-jato",
+            "Imobiliária",
+            "Academia",
+            "Clínica",
             "Outro"
         ]
     )
@@ -748,19 +763,46 @@ else:
     # COMENTÁRIOS DOS PARTICIPANTES
     st.markdown('<div id="comentarios"></div>', unsafe_allow_html=True)
     st.divider()
-    st.subheader("💬 Comentários dos participantes")
+    st.subheader("💬 O que os clientes estão dizendo")
 
     comentarios_publicos = dados_filtrados[
         dados_filtrados["comentario"].fillna("").astype(str).str.strip() != ""
     ].sort_values("data", ascending=False)
-
+    emojis_servicos = {
+        "salão de beleza": "💅",
+        "barbearia": "💈",
+        "restaurante": "🍽️",
+        "academia": "🏋️",
+        "clínica": "🏥",
+        "mercado": "🛒",
+        "oficina": "🔧",
+        "farmácia": "💊",
+        "pet shop": "🐾",
+        "padaria": "🥖",
+        "supermercado": "🛒",
+        "loja de roupas": "👕",
+        "loja de eletrônicos": "📱",
+        "hotel e pousada": "🏨",
+        "transporte": "🚕",
+        "assistência técnica": "🛠️",
+        "dentista": "🦷",
+        "escola e cursos": "🎓",
+        "lava-jato": "🚗",
+        "imobiliária": "🏠",
+    }
     if not comentarios_publicos.empty:
         for _, avaliacao in comentarios_publicos.iterrows():
             with st.container(border=True):
                 coluna1, coluna2 = st.columns([3, 1])
 
                 with coluna1:
-                    st.markdown(f"**{avaliacao['tipo_servico']}**")
+                    servico = str(avaliacao["tipo_servico"])
+                    emoji = emojis_servicos.get(servico.strip().lower(), "📌")
+                    st.markdown(f"**{emoji} {servico}**")
+
+                    estabelecimento = avaliacao.get("estabelecimento")
+                    if pd.notna(estabelecimento) and str(estabelecimento).strip():
+                        st.caption(f"📍 {estabelecimento}")
 
                 with coluna2:
                     st.markdown(f"⭐ **{avaliacao['nota']}/5**")
