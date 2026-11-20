@@ -231,6 +231,70 @@ hr {
     font-weight: 700;
     padding-right: 35px;
 }
+
+/* ===== AJUSTES PARA CELULARES ===== */
+@media screen and (max-width: 768px) {
+
+    .block-container {
+        padding: 1rem 0.8rem 2rem !important;
+        max-width: 100% !important;
+    }
+
+    .hero-conectamais h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+}
+
+    h2 {
+        font-size: 1.45rem !important;
+    }
+
+    h3 {
+        font-size: 1.2rem !important;
+    }
+
+    .hero-conectamais {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 24px 20px !important;
+        box-sizing: border-box !important;
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+    }
+
+    .hero-conectamais h1,
+.hero-conectamais p {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    box-sizing: border-box !important;
+}
+
+    .stButton > button,
+    .stFormSubmitButton > button {
+        width: 100% !important;
+        min-height: 46px !important;
+    }
+
+    [data-testid="stMetric"] {
+        padding: 14px !important;
+    }
+
+    [data-testid="stDataFrame"],
+    [data-testid="stTable"] {
+        max-width: 100% !important;
+    }
+}
+
 </style> 
 """, unsafe_allow_html=True)
 
