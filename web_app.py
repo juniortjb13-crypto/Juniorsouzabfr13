@@ -770,3 +770,46 @@ else:
     else:
         st.info("Ainda não existem comentários registrados.")
     st.caption("ConectaMais © 2026 | Conectando dados e decisões")
+
+
+st.markdown("""
+<style>
+.footer-conectamais {
+    text-align: center;
+    padding: 30px 15px;
+    margin-top: 40px;
+    border-top: 1px solid #DCE8F5;
+}
+
+.footer-conectamais p {
+    color: #58718E;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-conectamais a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #168A52 !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+</style>
+
+<div class="footer-conectamais">
+    <h3>Desenvolvido por Adriano Junior</h3>
+    <p>
+        Estudante de Análise e Desenvolvimento de Sistemas,
+        transformando conhecimento em soluções que conectam
+        pessoas e geram impacto.
+    </p>
+    <a href="https://wa.me/5521983142168"
+       target="_blank">
+        💬 Fale comigo pelo WhatsApp
+<img src="https://cdn.simpleicons.org/whatsapp/25D366"
+     width="18"
+     style="vertical-align:middle; margin-left:5px;">
+    </a>
+</div>
+""", unsafe_allow_html=True)
+
