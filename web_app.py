@@ -6,6 +6,8 @@ from datetime import date
 from supabase import create_client
 from supabase import create_client
 import plotly.graph_objects as go
+import random
+from streamlit_image_select import image_select
 
 # Conexão com o Supabase
 supabase = create_client(
@@ -506,27 +508,135 @@ footer {
     }
 }
 
-/* Adaptação para celulares */
+
+/* ===== ADAPTAÇÃO PARA CELULARES ===== */
+
+/* ===== CONECTAMAIS - RESPONSIVIDADE MOBILE ===== */
 @media (max-width: 768px) {
+
+    /* Menu lateral transformado em menu superior */
     .cm-sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 18px;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 12px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: block !important;
     }
 
     .cm-brand {
-        margin-bottom: 20px;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        margin-bottom: 12px !important;
+        text-align: center !important;
+    }
+
+    .cm-logo {
+        font-size: 28px !important;
+        margin: 0 !important;
+    }
+
+    .cm-brand-name {
+        font-size: 21px !important;
+        margin: 0 !important;
+    }
+
+    .cm-brand p,
+    .cm-sidebar-footer {
+        display: none !important;
     }
 
     .cm-menu {
-        gap: 5px;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
     }
 
-    .cm-sidebar-footer {
-        margin-top: 20px;
+    .cm-menu a {
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 11px 5px !important;
+        font-size: 12px !important;
+        margin: 0 !important;
+    }
+
+    /* Conteúdo principal ocupa a tela inteira */
+    .stMainBlockContainer {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Globo */
+    .cm-hero-top {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .cm-planet-area {
+        transform: scale(0.75) !important;
+        margin: -15px auto !important;
+    }
+
+    /* Avatares e colunas */
+    div[data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+
+    div[data-testid="column"] {
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    div[data-testid="stImage"] {
+        max-width: 100% !important;
+    }
+
+    /* Campos */
+    input,
+    textarea,
+    select {
+        max-width: 100% !important;
+    }
+
+    /* Títulos */
+    h1 {
+        font-size: 26px !important;
+    }
+
+    h2 {
+        font-size: 22px !important;
+    }
+
+    h3 {
+        font-size: 19px !important;
+    }
+
+    /* Evitar rolagem horizontal */
+    html,
+    body {
+        overflow-x: hidden !important;
     }
 }
+
+
 
 /* ===== UNIVERSO CONECTAMAIS ===== */
 
@@ -812,21 +922,22 @@ with st.sidebar:
 
 def carregar_dados():
     resposta = supabase.table("avaliacoes").select(
-        "id,nome_avaliador,tipo_servico,estabelecimento,cidade,nota,comentario,data"
-    ).order("data", desc=True).execute()
+    "id,nome_avaliador,avatar,tipo_servico,estabelecimento,cidade,nota,comentario,data"
+).order("data", desc=True).execute()
 
     dados = pd.DataFrame(resposta.data)
 
     colunas = [
-        "id",
-        "nome_avaliador"
-        "tipo_servico",
-        "estabelecimento",
-        "cidade",
-        "nota",
-        "comentario",
-        "data"
-    ]
+    "id",
+    "nome_avaliador",
+    "avatar",
+    "tipo_servico",
+    "estabelecimento",
+    "cidade",
+    "nota",
+    "comentario",
+    "data"
+]
 
     if dados.empty:
         return pd.DataFrame(columns=colunas)
@@ -842,52 +953,53 @@ st.markdown('<div id="inicio"></div>', unsafe_allow_html=True)
 st.markdown('<div id="avaliar-servico"></div>', unsafe_allow_html=True)
 st.header("📝 Avalie um serviço")
 
+
+# Galeria de avatares clicáveis
+st.markdown("### Escolha seu avatar")
+st.caption("Clique diretamente no personagem desejado.")
+
+if "avatar_selecionado" not in st.session_state:
+    st.session_state.avatar_selecionado = "avatar_01"
+
+colunas_avatares = st.columns(5)
+
+for i in range(1, 11):
+    avatar = f"avatar_{i:02d}"
+    with colunas_avatares[(i - 1) % 5]:
+        st.image(f"assets/avatares/{avatar}.png", width=90)
+        if st.button(
+            "✓ Selecionado" if st.session_state.avatar_selecionado == avatar else f"Avatar {i:02d}",
+            key=f"botao_{avatar}",
+            use_container_width=True
+        ):
+            st.session_state.avatar_selecionado = avatar
+            st.rerun()
+
 with st.form("formulario_avaliacao"):
     tipo_servico = st.selectbox(
         "Qual serviço você utilizou?",
-                [
-            "Barbearia",
-            "Salão de beleza",
-            "Restaurante",
-            "Lanchonete",
-            "Oficina mecânica",
-            "Mercado",
-            "Farmácia",
-            "Pet shop",
-            "Padaria",
-            "Supermercado",
-            "Loja de roupas",
-            "Loja de eletrônicos",
-            "Hotel e pousada",
-            "Transporte",
-            "Assistência técnica",
-            "Dentista",
-            "Escola e cursos",
-            "Lava-jato",
-            "Imobiliária",
-            "Academia",
-            "Clínica",
-            "Outro"
+        [
+            "Barbearia", "Salão de beleza", "Restaurante", "Lanchonete",
+            "Oficina mecânica", "Mercado", "Farmácia", "Pet shop",
+            "Padaria", "Supermercado", "Loja de roupas",
+            "Loja de eletrônicos", "Hotel e pousada", "Transporte",
+            "Assistência técnica", "Dentista", "Escola e cursos",
+            "Lava-jato", "Imobiliária", "Academia", "Clínica", "Outro"
         ]
     )
 
-    nome_avaliador = st.text_input(
-        "Seu nome"
-    )
-
-    estabelecimento = st.text_input(
-        "Nome do estabelecimento"
-    )
-
+    nome_avaliador = st.text_input("Seu nome")
+    estabelecimento = st.text_input("Nome do estabelecimento")
     cidade = st.text_input("Cidade")
-
     avaliacao_estrelas = st.feedback("stars")
 
     nota = None if avaliacao_estrelas is None else avaliacao_estrelas + 1
-    if avaliacao_estrelas is not None:
+
+    if nota is not None:
         st.caption(f"⭐ Nota selecionada: {nota}/5")
     else:
         st.caption("Selecione uma estrela para avaliar.")
+
     comentario = st.text_area(
         "Conte um pouco sobre sua experiência (opcional)"
     )
@@ -901,17 +1013,36 @@ if enviar:
         st.warning("Informe a cidade onde utilizou o serviço.")
     else:
         novo_registro = {
-    "nome_avaliador": nome_avaliador.strip(),
-    "tipo_servico": tipo_servico,
-    "estabelecimento": estabelecimento.strip(),
-    "cidade": cidade.strip(),
-    "nota": nota,
-    "comentario": comentario.strip()
-}
+            "nome_avaliador": nome_avaliador.strip(),
+            "avatar": st.session_state.avatar_selecionado,
+            "tipo_servico": tipo_servico,
+            "estabelecimento": estabelecimento.strip(),
+            "cidade": cidade.strip(),
+            "nota": nota,
+            "comentario": comentario.strip()
+        }
 
         supabase.table("avaliacoes").insert(novo_registro).execute()
+        st.markdown("""
+<div style="
+    background: linear-gradient(90deg, #063b50, #075b68);
+    border: 1px solid #00d9c5;
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 12px;
+">
+    ✅ Avaliação enviada com sucesso! Obrigado por contribuir com o ConectaMais.
+</div>
+""", unsafe_allow_html=True)
 
-        st.success("Obrigado! Sua avaliação foi registrada.")
+
+
+
+
+    
 
 
 # ==================================
@@ -975,9 +1106,25 @@ st.divider()
 st.header("📊 Dashboard de satisfação")
 
 dados = carregar_dados()
+dados_filtrados = dados.copy()
 
 if dados.empty:
-    st.info("Ainda não existem avaliações cadastradas.")
+    st.markdown("""
+<div style="
+    background: rgba(10, 35, 65, 0.85);
+    border: 1px solid rgba(0, 200, 230, 0.45);
+    border-radius: 12px;
+    padding: 18px;
+    color: #EAF6FF;
+    font-size: 15px;
+">
+    📊 Ainda não existem avaliações cadastradas.
+    <br>
+    <span style="color: #8FC5DF;">
+        Assim que os clientes avaliarem os serviços, os indicadores aparecerão aqui.
+    </span>
+</div>
+""", unsafe_allow_html=True)
 else:
     dados["nota"] = pd.to_numeric(dados["nota"], errors="coerce")
     dados = dados.dropna(subset=["nota"])
@@ -1207,64 +1354,129 @@ else:
     # COMENTÁRIOS DOS PARTICIPANTES
     st.markdown('<div id="comentarios"></div>', unsafe_allow_html=True)
     st.divider()
-    st.subheader("💬 O que os clientes estão dizendo")
+    
+st.subheader("💬 O que os clientes estão dizendo")
 
-    comentarios_publicos = dados_filtrados[
-        dados_filtrados["comentario"].fillna("").astype(str).str.strip() != ""
-    ].sort_values("data", ascending=False)
-    emojis_servicos = {
-        "salão de beleza": "💅",
-        "barbearia": "💈",
-        "restaurante": "🍽️",
-        "academia": "🏋️",
-        "clínica": "🏥",
-        "mercado": "🛒",
-        "oficina": "🔧",
-        "farmácia": "💊",
-        "pet shop": "🐾",
-        "padaria": "🥖",
-        "supermercado": "🛒",
-        "loja de roupas": "👕",
-        "loja de eletrônicos": "📱",
-        "hotel e pousada": "🏨",
-        "transporte": "🚕",
-        "assistência técnica": "🛠️",
-        "dentista": "🦷",
-        "escola e cursos": "🎓",
-        "lava-jato": "🚗",
-        "imobiliária": "🏠",
-    }
-    if not comentarios_publicos.empty:
-        for _, avaliacao in comentarios_publicos.iterrows():
-            with st.container(border=True):
-                coluna1, coluna2 = st.columns([3, 1])
+comentarios_publicos = dados_filtrados[
+    dados_filtrados["comentario"].fillna("").astype(str).str.strip() != ""
+].sort_values("data", ascending=False)
 
-                with coluna1:
-                                    nome_avaliador = str(
-                    avaliacao.get("nome_avaliador") or ""
-                ).strip()
+emojis_servicos = {
+    "salão de beleza": "💅",
+    "barbearia": "💈",
+    "restaurante": "🍽️",
+    "academia": "🏋️",
+    "clínica": "🏥",
+    "mercado": "🛒",
+    "oficina": "🔧",
+    "farmácia": "💊",
+    "pet shop": "🐾",
+    "padaria": "🥖",
+    "supermercado": "🛒",
+    "loja de roupas": "👕",
+    "loja de eletrônicos": "📱",
+    "hotel e pousada": "🏨",
+    "transporte": "🚕",
+    "assistência técnica": "🛠️",
+    "dentista": "🦷",
+    "escola e cursos": "🎓",
+    "lava-jato": "🚗",
+    "imobiliária": "🏠",
+}
 
+avatares = {
+    "masculino": "👨🏻",
+    "feminino": "👩🏻",
+    "neutro": "🧑🏻",
+}
+
+if not comentarios_publicos.empty:
+    for _, avaliacao in comentarios_publicos.iterrows():
+
+        with st.container(border=True):
+
+            coluna_avatar, coluna_nome, coluna_nota = st.columns([0.8, 4, 1.2])
+
+            # Avatar do avaliador
+                        # Avatar real do avaliador
+            avatar_tipo = avaliacao.get("avatar", "avatar_03")
+
+            if pd.isna(avatar_tipo):
+                avatar_tipo = "avatar_03"
+
+            avatar_tipo = str(avatar_tipo).strip().lower()
+
+            if avatar_tipo not in [
+                f"avatar_{i:02d}" for i in range(1, 11)
+            ]:
+                avatar_tipo = "avatar_03"
+
+            caminho_avatar = f"assets/avatares/{avatar_tipo}.png"
+
+            with coluna_avatar:
+                st.image(caminho_avatar, width=75)
+
+            # Nome do avaliador
+            nome_avaliador = avaliacao.get("nome_avaliador", "")
+
+            if pd.isna(nome_avaliador):
+                nome_avaliador = ""
+
+            nome_avaliador = str(nome_avaliador).strip()
+
+            with coluna_nome:
                 if nome_avaliador:
-                    st.caption(f"👤 Avaliado por: {nome_avaliador}")
+                    st.markdown(f"**{nome_avaliador}**")
                 else:
-                    st.caption("👤 Avaliação anônima")
+                    st.markdown("**Avaliação anônima**")
 
-                    servico = str(avaliacao["tipo_servico"])
-                    emoji = emojis_servicos.get(servico.strip().lower(), "📌")
-                    st.markdown(f"**{emoji} {servico}**")
+                st.caption("Cliente ConectaMais")
 
-                    estabelecimento = avaliacao.get("estabelecimento")
-                    if pd.notna(estabelecimento) and str(estabelecimento).strip():
-                        st.caption(f"📍 {estabelecimento}")
+            # Nota
+            with coluna_nota:
+                st.markdown(f"⭐ **{avaliacao['nota']}/5**")
 
-                with coluna2:
-                    st.markdown(f"⭐ **{avaliacao['nota']}/5**")
+            st.divider()
 
-                st.markdown("---")
-                st.write(avaliacao["comentario"])
-    else:
-        st.info("Ainda não existem comentários registrados.")
-    st.caption("ConectaMais © 2026 | Conectando dados e decisões")
+            # Etiquetas da avaliação
+            servico = str(avaliacao.get("tipo_servico", "Outro"))
+            emoji = emojis_servicos.get(servico.strip().lower(), "📌")
+
+            estabelecimento = avaliacao.get("estabelecimento", "")
+
+            if pd.isna(estabelecimento):
+                estabelecimento = ""
+
+            estabelecimento = str(estabelecimento).strip()
+
+            st.caption(f"🏷️ {emoji} {servico}")
+
+            if estabelecimento:
+                st.caption(f"📍 {estabelecimento}")
+
+            # Comentário
+            st.write(avaliacao["comentario"])
+
+else:
+    st.markdown("""
+<div style="
+    background: rgba(10, 35, 65, 0.85);
+    border: 1px solid rgba(0, 200, 230, 0.45);
+    border-radius: 12px;
+    padding: 18px;
+    color: #EAF6FF;
+    font-size: 15px;
+">
+    💬 Ainda não existem comentários registrados.
+    <br>
+    <span style="color: #8FC5DF;">
+        Seja o primeiro a compartilhar sua experiência com a comunidade!
+    </span>
+</div>
+""", unsafe_allow_html=True)
+
+st.caption("ConectaMais © 2026 | Conectando dados e decisões")
+
 
 
 st.markdown("""
