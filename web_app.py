@@ -295,6 +295,449 @@ hr {
     }
 }
 
+
+/* =====================================
+   CONECTAMAIS - TEMA FUTURISTA NEON
+===================================== */
+
+.stApp,
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(ellipse at 75% 5%, rgba(0, 180, 255, 0.13), transparent 35%),
+        radial-gradient(ellipse at 15% 80%, rgba(0, 90, 220, 0.12), transparent 40%),
+        #050B18 !important;
+    color: #EAF4FF !important;
+}
+
+[data-testid="stHeader"] {
+    background: rgba(5, 11, 24, 0.85) !important;
+}
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #08162C, #050B18) !important;
+    border-right: 1px solid rgba(0, 200, 255, 0.25);
+}
+
+[data-testid="stSidebar"] * {
+    color: #DCEBFF;
+}
+
+h1, h2, h3, h4 {
+    color: #F4F9FF !important;
+}
+
+p, label, span {
+    color: #D5E4F5;
+}
+
+/* Cartões e indicadores */
+[data-testid="stMetric"],
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background: linear-gradient(
+        145deg,
+        rgba(13, 34, 62, 0.92),
+        rgba(7, 18, 38, 0.96)
+    ) !important;
+    border: 1px solid rgba(0, 190, 255, 0.30) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 5px 22px rgba(0, 150, 255, 0.10);
+}
+
+/* Números dos indicadores */
+[data-testid="stMetricValue"] {
+    color: #35D9FF !important;
+    font-weight: 800;
+}
+
+/* Textos dos indicadores */
+[data-testid="stMetricLabel"] {
+    color: #B8D3EE !important;
+}
+
+/* Campos de formulário */
+.stTextInput input,
+.stTextArea textarea,
+.stSelectbox div[data-baseweb="select"] {
+    background-color: #101F36 !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(0, 190, 255, 0.35) !important;
+    border-radius: 10px !important;
+}
+
+/* Botões */
+.stButton > button,
+.stFormSubmitButton > button {
+    background: linear-gradient(135deg, #087BCE, #04C9C4) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(70, 220, 255, 0.45) !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    transition: all 0.25s ease;
+}
+
+.stButton > button:hover,
+.stFormSubmitButton > button:hover {
+    box-shadow: 0 0 18px rgba(0, 200, 255, 0.45);
+    transform: translateY(-2px);
+}
+
+/* Gráficos */
+[data-testid="stPlotlyChart"] {
+    background: rgba(8, 22, 43, 0.65);
+    border: 1px solid rgba(0, 190, 255, 0.20);
+    border-radius: 16px;
+    padding: 8px;
+}
+
+/* Tabelas */
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    background: #0B1930 !important;
+    border-radius: 12px;
+}
+
+/* Links */
+a {
+    color: #35D9FF !important;
+}
+
+/* Rodapé */
+footer {
+    visibility: hidden;
+}
+
+
+/* ===== CONECTAMAIS - MENU LATERAL ===== */
+
+.cm-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 245px;
+    height: 100vh;
+    padding: 35px 20px;
+    background: linear-gradient(180deg, #06152F, #020B1B);
+    border-right: 1px solid rgba(0, 200, 255, 0.35);
+    box-shadow: 5px 0 30px rgba(0, 120, 255, 0.12);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+}
+
+.cm-brand {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.cm-logo {
+    font-size: 48px;
+    color: #16D9FF;
+    margin-bottom: 10px;
+}
+
+.cm-brand-name {
+    font-size: 25px;
+    font-weight: 800;
+    color: #FFFFFF;
+}
+
+.cm-brand-name span {
+    color: #16D9FF;
+}
+
+.cm-brand p {
+    color: #AFC8E8;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.cm-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cm-menu a {
+    display: block;
+    padding: 14px;
+    color: #C7D9F2 !important;
+    text-decoration: none !important;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.cm-menu a:hover,
+.cm-menu a.active {
+    color: #FFFFFF !important;
+    background: linear-gradient(90deg, #0755A8, #087FC4);
+    box-shadow: 0 0 18px rgba(0, 190, 255, 0.25);
+}
+
+.cm-sidebar-footer {
+    margin-top: auto;
+    padding: 16px;
+    border: 1px solid rgba(0, 190, 255, 0.2);
+    border-radius: 14px;
+    color: #C7D9F2;
+    text-align: center;
+    background: rgba(0, 100, 180, 0.08);
+}
+
+.cm-sidebar-footer span {
+    font-size: 28px;
+}
+
+.cm-sidebar-footer p {
+    font-size: 13px;
+}
+
+.cm-status {
+    color: #39E6A0;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* Conteúdo ao lado do menu */
+@media (min-width: 769px) {
+    .stMainBlockContainer {
+        margin-left: 245px !important;
+        max-width: calc(100% - 270px) !important;
+    }
+}
+
+/* Adaptação para celulares */
+@media (max-width: 768px) {
+    .cm-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 18px;
+    }
+
+    .cm-brand {
+        margin-bottom: 20px;
+    }
+
+    .cm-menu {
+        gap: 5px;
+    }
+
+    .cm-sidebar-footer {
+        margin-top: 20px;
+    }
+}
+
+/* ===== UNIVERSO CONECTAMAIS ===== */
+
+.stApp,
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(ellipse at 78% 12%, rgba(0, 180, 255, 0.16), transparent 32%),
+        radial-gradient(ellipse at 18% 75%, rgba(0, 90, 220, 0.13), transparent 38%),
+        linear-gradient(135deg, #020817, #06152D 55%, #020817) !important;
+}
+
+/* Cabeçalho principal */
+.cm-universe {
+    position: relative;
+    min-height: 340px;
+    padding: 35px 20px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 78% 45%, rgba(0, 190, 255, 0.12), transparent 28%);
+}
+
+.cm-hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 300px;
+    gap: 25px;
+}
+
+.cm-hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 540px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="cm-universe">
+<div class="cm-hero-top">
+<div class="cm-hero-text">
+<span class="cm-hero-label">CONECTAMAIS • EXPERIÊNCIA E QUALIDADE</span>
+<h1>Conecta<span>Mais</span></h1>
+<p>Avaliações reais. Dados confiáveis.<br>
+Uma comunidade mais conectada.</p>
+<div class="cm-hero-line"></div>
+</div>
+<div class="cm-planet-area">
+<div class="cm-orbit cm-orbit-one"></div>
+<div class="cm-orbit cm-orbit-two"></div>
+<div class="cm-planet"></div>
+</div>
+</div>
+</div>
+""", unsafe_allow_html=True)
+st.markdown("""
+<style>
+.cm-hero-text h1 span {
+    color: #18C7D9 !important;
+}
+.cm-hero-text p {
+    color: #B9CCE3;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.cm-hero-line {
+    width: 100px;
+    height: 3px;
+    margin-top: 20px;
+    background: linear-gradient(90deg, #20D6C2, #168BFF, transparent);
+    box-shadow: 0 0 15px #00CFFF;
+}
+
+
+/* GLOBO REALISTA CONECTAMAIS */
+
+.cm-planet-area {
+    position: relative;
+    width: 390px;
+    height: 340px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+/* Planeta Terra */
+.cm-planet {
+    position: relative;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    z-index: 1;
+
+    background-image:
+        url("https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg");
+
+    background-size: auto 100%;
+    background-position: 0 center;
+    background-repeat: repeat-x;
+
+    box-shadow:
+        inset -25px -10px 40px rgba(0, 5, 25, .85),
+        inset 10px 5px 25px rgba(80, 190, 255, .25),
+        0 0 30px rgba(0, 180, 255, .55),
+        0 0 75px rgba(0, 130, 255, .35);
+
+    animation:
+        cm-earth-spin 50s linear infinite;
+}
+
+/* Atmosfera azul */
+.cm-planet::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            transparent 55%,
+            rgba(0, 190, 255, .22) 75%,
+            rgba(0, 100, 255, .45) 100%
+        );
+
+    box-shadow:
+        0 0 18px rgba(0, 190, 255, .55),
+        inset 0 0 15px rgba(0, 180, 255, .35);
+}
+
+
+/* Anéis orbitais envolvendo a Terra */
+.cm-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 350px;
+    height: 125px;
+    border: 2px solid rgba(0, 220, 255, .85);
+    border-radius: 50%;
+    box-shadow:
+        0 0 12px rgba(0, 210, 255, .75),
+        0 0 25px rgba(0, 130, 255, .35);
+    z-index: 3;
+}
+
+.cm-orbit-one {
+    animation:
+        cm-orbit-rotate-one 35s linear infinite,
+        cm-orbit-glow 6s ease-in-out infinite;
+}
+
+.cm-orbit-two {
+    width: 370px;
+    height: 145px;
+    border-color: rgba(0, 150, 255, .65);
+    animation:
+        cm-orbit-rotate-two 45s linear infinite,
+        cm-orbit-glow 8s ease-in-out infinite reverse;
+}
+
+@keyframes cm-orbit-rotate-one {
+    from { transform: translate(-50%, -50%) rotate(-24deg); }
+    to { transform: translate(-50%, -50%) rotate(336deg); }
+}
+
+@keyframes cm-orbit-rotate-two {
+    from { transform: translate(-50%, -50%) rotate(25deg); }
+    to { transform: translate(-50%, -50%) rotate(385deg); }
+}
+
+
+
+/* Rotação lenta da Terra */
+@keyframes cm-earth-spin {
+    from {
+        background-position: 0 center;
+    }
+    to {
+        background-position: -460px center;
+    }
+}
+
+/* Brilho dos anéis */
+@keyframes cm-orbit-glow {
+    0%, 100% {
+        opacity: .55;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Telas menores */
+@media (max-width: 768px) {
+    .cm-hero-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cm-planet-area {
+        width: 100%;
+        transform: scale(.8);
+        margin-top: -15px;
+    }
+}
+
 </style> 
 """, unsafe_allow_html=True)
 
@@ -303,40 +746,35 @@ ARQUIVO_DADOS = "clientes.csv"
 # CABEÇALHO PRINCIPAL
 
 
+
+
 st.markdown("""
-<div style="display:flex; align-items:center; gap:22px; flex-wrap:wrap;
-padding:18px 24px; margin-bottom:24px; background:#FFFFFF;
-border:1px solid #E2EAF4; border-radius:14px;
-box-shadow:0 4px 16px rgba(15,50,100,0.06);">
-
-<div style="font-size:23px;font-weight:800;color:#1053A3;">
-ConectaMais<span style="color:#20A4E8;">.</span>
+<div class="cm-sidebar">
+<div class="cm-brand">
+<div class="cm-logo">🌐</div>
+<div class="cm-brand-name">Conecta<span>Mais</span></div>
+<p>Conectando pessoas<br>e serviços de qualidade</p>
 </div>
-
-<div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
-<a href="#inicio" style="color:#173B65;text-decoration:none;font-weight:600;">Início</a>
-<a href="#avaliar-servico" style="color:#173B65;text-decoration:none;font-weight:600;">Avaliar serviço</a>
-<a href="#comentarios" style="color:#173B65;text-decoration:none;font-weight:600;">Comentários</a>
-<a href="#dashboard" style="color:#173B65;text-decoration:none;font-weight:600;">Dashboard</a>
-<a href="#avaliar-servico" style="background:#1053A3;color:white;padding:11px 18px;border-radius:9px;text-decoration:none;font-weight:700;">Avaliar agora →</a>
+<nav class="cm-menu">
+<a href="#inicio" class="active">🏠 Início</a>
+<a href="#avaliar-servico">⭐ Avaliar serviço</a>
+<a href="#comentarios">💬 Comentários</a>
+<a href="#dashboard">📊 Dashboard</a>
+</nav>
+<div class="cm-sidebar-footer">
+<span>🚀</span>
+<p>Juntos por uma experiência cada vez melhor!</p>
+<div class="cm-status">🟢 Sistema online</div>
 </div>
-
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="hero-conectamais">
-    <div class="hero-conteudo">
-        <span class="hero-etiqueta">CONECTAMAIS • EXPERIÊNCIA E QUALIDADE</span>
-        <h1>Sua opinião transforma serviços.</h1>
-        <p>
-            Avalie experiências, compartilhe sua opinião e ajude
-            estabelecimentos a oferecer um atendimento cada vez melhor.
-        </p>
-    </div>
-    <div class="hero-icone">✦</div>
-</div>
-""", unsafe_allow_html=True)
+
+
+
+
+
+
 # ==============================
 # ACESSO DO ADMINISTRADOR
 # ==============================
@@ -374,13 +812,14 @@ with st.sidebar:
 
 def carregar_dados():
     resposta = supabase.table("avaliacoes").select(
-        "id,tipo_servico,estabelecimento,cidade,nota,comentario,data"
+        "id,nome_avaliador,tipo_servico,estabelecimento,cidade,nota,comentario,data"
     ).order("data", desc=True).execute()
 
     dados = pd.DataFrame(resposta.data)
 
     colunas = [
         "id",
+        "nome_avaliador"
         "tipo_servico",
         "estabelecimento",
         "cidade",
@@ -432,8 +871,12 @@ with st.form("formulario_avaliacao"):
         ]
     )
 
+    nome_avaliador = st.text_input(
+        "Seu nome"
+    )
+
     estabelecimento = st.text_input(
-        "Nome do estabelecimento (opcional)"
+        "Nome do estabelecimento"
     )
 
     cidade = st.text_input("Cidade")
@@ -458,12 +901,13 @@ if enviar:
         st.warning("Informe a cidade onde utilizou o serviço.")
     else:
         novo_registro = {
-            "tipo_servico": tipo_servico,
-            "estabelecimento": estabelecimento.strip(),
-            "cidade": cidade.strip(),
-            "nota": nota,
-            "comentario": comentario.strip()
-        }
+    "nome_avaliador": nome_avaliador.strip(),
+    "tipo_servico": tipo_servico,
+    "estabelecimento": estabelecimento.strip(),
+    "cidade": cidade.strip(),
+    "nota": nota,
+    "comentario": comentario.strip()
+}
 
         supabase.table("avaliacoes").insert(novo_registro).execute()
 
@@ -796,6 +1240,15 @@ else:
                 coluna1, coluna2 = st.columns([3, 1])
 
                 with coluna1:
+                                    nome_avaliador = str(
+                    avaliacao.get("nome_avaliador") or ""
+                ).strip()
+
+                if nome_avaliador:
+                    st.caption(f"👤 Avaliado por: {nome_avaliador}")
+                else:
+                    st.caption("👤 Avaliação anônima")
+
                     servico = str(avaliacao["tipo_servico"])
                     emoji = emojis_servicos.get(servico.strip().lower(), "📌")
                     st.markdown(f"**{emoji} {servico}**")
